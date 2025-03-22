@@ -43,7 +43,7 @@ const Hero = () => {
               </motion.div>
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-text-light mb-4">
-              Hi, I'm <span className="text-secondary">Karthik</span>
+              Hi! I'm <span className="text-secondary">Karthik</span>
             </h1>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-light mb-6">
               Software Engineer

@@ -115,8 +115,8 @@ const Contact = () => {
             <div>
               <h3 className="text-text-light font-semibold mb-4">Let's Connect</h3>
               <p className="text-text">
-                I'm currently looking for internship opportunities and open to discussing new projects,
-                creative ideas, or opportunities to be part of your visions.
+                I'm currently looking for full-time Software Engineering opportunities and open to discussing new projects,
+                creative ideas, or opportunities to be part of your company's visions.
               </p>
             </div>
 
@@ -141,7 +141,7 @@ const Contact = () => {
             <div>
               <h3 className="text-text-light font-semibold mb-4">Location</h3>
               <p className="text-text">
-                Champaign, Illinois
+                Chicago, Illinois
               </p>
             </div>
           </motion.div>

@@ -8,15 +8,15 @@ const Experience = () => {
         title: "Software Engineering Intern",
         company: "Informatica",
         period: "June 2024 - August 2024",
-        description: "Engineered a retrieval-augmented generation (RAG) system using LlamaIndex and PostgreSQL for text-to-SQL conversion, achieving 20% boost in query retrieval accuracy. Streamlined report generation with Pandas and OpenPyXL, cutting processing time by 30%.",
-        technologies: ["Python", "LlamaIndex", "PostgreSQL", "Pandas", "OpenPyXL", "Pytest"]
+        description: "Developed a retrieval-augmented generation system using LlamaIndex and PostgreSQL to enable seamless text-to-SQL conversion. Enhanced report generation by integrating Pandas and OpenPyXL to streamline data processing and support robust analytics.",
+        technologies: ["Python", "LlamaIndex", "PostgreSQL", "Pandas", "OpenPyXL", "Pytest", "Rest"]
       },
       {
         title: "Software Engineering Intern",
         company: "Informatica",
         period: "June 2023 - August 2023",
-        description: "Modeled an entity extraction system using SpaCy to process 10,000+ configuration records, boosting parameter identification accuracy by 15%. Refined LLM APIs for the Informatica Knowledge Base, achieving 91% accuracy in misconfiguration detection.",
-        technologies: ["Python", "SpaCy", "LLM", "Agile"]
+        description: "Created an entity extraction system using SpaCy to process configuration records and improve parameter identification. Refined LLM APIs for the Informatica Knowledge Base, focusing on more accurate detection of misconfigurations.",
+        technologies: ["Python", "SpaCy", "OpenAI", "Agile"]
       }
     ],
     academic: [
@@ -24,15 +24,15 @@ const Experience = () => {
         title: "Project Manager",
         company: "Project Code UIUC",
         period: "August 2023 - May 2024",
-        description: "Directed a 12-member team developing a full-stack UIUC Apartments website. Implemented interactive mapping with LeafletJS and optimized MySQL indexing to reduce query response times by 25%. Coordinated Agile sprints via Trello, achieving 90% task completion rate.",
+        description: "Led a collaborative team to build a full-stack UIUC Apartments website that integrates interactive mapping with LeafletJS and efficient MySQL querying. Coordinated Agile sprints using Trello to ensure smooth project execution and effective teamwork.",
         technologies: ["React", "MySQL", "Flask", "LeafletJS", "Agile", "Trello"]
       },
       {
         title: "Research Assistant",
         company: "ClassTranscribe Group",
         period: "August 2023 - January 2024",
-        description: "Devised TensorFlow-based CNN transcription models for lecture video accessibility, boosting diagram recognition accuracy by 30%. Optimized OpenCV image processing pipelines to cut OCR latency.",
-        technologies: ["TensorFlow", "CNN", "OpenCV", "OCR"]
+        description: "Developed TensorFlow-based CNN transcription models to improve lecture video accessibility and enhance diagram recognition. Optimized OpenCV image processing pipelines to reduce OCR latency and support faster content processing.",
+        technologies: ["TensorFlow", "CNN", "OpenCV", "CLIP", "Python", "OpenAI"]
       }
     ]
   };
@@ -101,7 +101,7 @@ const Experience = () => {
           >
             <div className="flex items-center space-x-3 mb-8">
               <FiAward className="w-6 h-6 text-secondary" />
-              <h3 className="text-2xl font-bold text-text-light">Academic Experience</h3>
+              <h3 className="text-2xl font-bold text-text-light">Resrarch/Leadership Experience</h3>
             </div>
             {experiences.academic.map((exp, index) => (
               <motion.div

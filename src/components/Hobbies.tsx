@@ -1,32 +1,34 @@
 import { motion } from 'framer-motion';
-import { FiActivity, FiMap, FiGlobe, FiAward, FiTarget } from 'react-icons/fi';
+import { GiChessKnight, GiCricketBat } from 'react-icons/gi';
+import { MdTravelExplore } from 'react-icons/md';
+import { FaFutbol, FaBicycle } from 'react-icons/fa';
 
 const Hobbies = () => {
   const hobbies = [
     {
-      icon: <FiActivity className="w-8 h-8" />,
+      icon: <GiChessKnight className="w-8 h-8" />,
       title: "Chess",
-      description: "Strategic thinking and competitive play in chess tournaments"
+      description: "Played since 5 years old, played at the state level in school"
     },
     {
-      icon: <FiMap className="w-8 h-8" />,
+      icon: <FaBicycle className="w-8 h-8" />,
       title: "Biking",
-      description: "Exploring scenic trails and maintaining an active lifestyle"
+      description: "Exploring any scenic trails I can find near me!"
     },
     {
-      icon: <FiGlobe className="w-8 h-8" />,
+      icon: <MdTravelExplore className="w-8 h-8" />,
       title: "GeoGuessr",
-      description: "Testing geography knowledge and exploring the world virtually"
+      description: "Drop me anywhere and I can tell you where it is! (Gold Division)"
     },
     {
-      icon: <FiAward className="w-8 h-8" />,
+      icon: <GiCricketBat className="w-8 h-8" />,
       title: "Cricket",
-      description: "Playing competitive cricket in local leagues"
+      description: "Always have a bat and ball on deck to play. Fan of CSK"
     },
     {
-      icon: <FiTarget className="w-8 h-8" />,
+      icon: <FaFutbol className="w-8 h-8" />,
       title: "Soccer",
-      description: "Regular matches and following professional leagues"
+      description: "Recreational player and fan of Mancherster City"
     }
   ];
 
@@ -69,4 +71,4 @@ const Hobbies = () => {
   );
 };
 
-export default Hobbies; 
+export default Hobbies;

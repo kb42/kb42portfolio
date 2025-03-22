@@ -49,13 +49,13 @@ const About = () => {
               which led me to explore web development and programming.
             </p>
             <p className="text-text-light text-lg">
-              Currently, I'm focused on building my foundation in computer science while developing
-              practical skills through personal projects and coursework. I enjoy learning new technologies
-              and applying them to create meaningful solutions.
+            I am passionate about solving complex problems at the intersection of data, algorithms, and engineering. 
+            With a background in Computer Engineering and a minor in Statistics, I focus on building scalable systems, 
+            improving performance, and leveraging AI to turn ideas into impactful solutions.
             </p>
             <p className="text-text-light text-lg">
-              When I'm not coding, you can find me exploring new technologies, contributing to open-source
-              projects, or learning about the latest developments in the tech industry.
+            I am always eager to connect with others in AI, data science, and software engineering, whether you are 
+            looking for collaborators, sharing ideas, or discussing trends in technology. Let's connect!
             </p>
           </motion.div>
 

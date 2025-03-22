@@ -9,39 +9,39 @@ const Projects = () => {
       {
         title: "Personal Portfolio",
         description: "A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. Features smooth animations, dark mode, and a clean, minimalist design.",
-        technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+        technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Netlify"],
         image: "/projects/portfolio.png"
       },
       {
         title: "SportFlow",
-        description: "Designed a microservices platform using Spring Boot, MongoDB, Angular, and Docker, orchestrated via AWS Kubernetes. Established a Jenkins CI/CD pipeline integrated with Selenium testing (80% coverage), cutting deployment cycles by 40%.",
+        description: "A dynamic fantasy sports analytics platform that combines a microservices architecture with modern web technologies. Built with Spring Boot, MongoDB, Angular, and Docker, and orchestrated through AWS Kubernetes, offering a fluid user experience with interactive analytics features.",
         technologies: ["Spring Boot", "MongoDB", "Angular", "Docker", "AWS", "Jenkins", "Selenium"],
         image: "/projects/sportflow.png"
       },
       {
         title: "Curriculum Crafter",
-        description: "Designed a full-stack web app to assist students in creating personalized academic plans with course data and transfer records. Spearheaded Flask back-end development, optimizing MySQL queries with relational algebra for 30% faster response time.",
-        technologies: ["Flask", "React", "MySQL", "TypeScript", "Tailwind CSS"],
+        description: "A full-stack academic planning tool that empowers students to create personalized academic pathways. This project integrates course catalog data and degree requirements using Flask, React, MySQL, and TypeScript, featuring interactive planning modules and dynamic visualizations.",
+        technologies: ["Flask", "React", "MySQL", "TypeScript", "CSS", "GCP"],
         image: "/projects/curriculum-crafter.png"
       }
     ],
     ml: [
       {
         title: "Innovative Illuminations",
-        description: "An AI-powered lighting control system that adapts to user preferences and environmental conditions, optimizing energy usage while maintaining comfort.",
-        technologies: ["Python", "TensorFlow", "IoT", "Raspberry Pi"],
+        description: "A real-time facial emotion recognition system that enhances interactive experiences with adaptive visual effects. This project utilizes Python, OpenCV, and Mediapipe to process live video feeds and apply dynamic face filters based on detected emotions.",
+        technologies: ["Python", "TensorFlow", "OpenCV", "Mediapipe", "Keras"],
         image: "/projects/innovative-illuminations.png"
       },
       {
         title: "SoccerViz Analytics Dashboard",
-        description: "Built an interactive soccer data dashboard using Shiny and ggplot2, improving analysis efficiency by 40% and processing 50,000+ competition records.",
+        description: "An interactive dashboard that visualizes soccer competition trends and player performance. This project employs Shiny, ggplot2, and D3.js to deliver customizable analytics and intuitive data exploration.",
         technologies: ["R", "Shiny", "ggplot2", "D3.js"],
         image: "/projects/soccer-viz.png"
       },
       {
         title: "SummarizedSpeech",
-        description: "Built a speech-to-text system with Wav2Vec, achieving 85% accuracy in sentiment analysis and 90% context relevance for key topics.",
-        technologies: ["Python", "Wav2Vec", "NLP", "Speech Recognition"],
+        description: "A speech-to-text processing system that transforms live audio into searchable content. This project leverages Wav2Vec, Python, and NLP to transcribe spoken language, analyze sentiment, and generate contextual links.",
+        technologies: ["Python", "Wav2Vec", "NLP", "Speech Recognition", "Spacy", "Jupyter"],
         image: "/projects/summarized-speech.png"
       }
     ]
