@@ -1,36 +1,58 @@
-import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiMail, FiSend } from 'react-icons/fi';
-import { useState } from 'react';
+// src/components/Contact.tsx
+import { motion } from 'framer-motion'
+import { FiGithub, FiLinkedin, FiMail, FiSend } from 'react-icons/fi'
+import { useState } from 'react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
-  });
+    message: '',
+  })
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-  };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // prepare URL-encoded form body
+    const body = new URLSearchParams()
+    body.append('form-name', 'contact')
+    body.append('name', formData.name)
+    body.append('email', formData.email)
+    body.append('message', formData.message)
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString(),
+    })
+      .then(() => setSubmitted(true))
+      .catch(() => setSubmitted(true))
+  }
 
   const socialLinks = [
     { icon: <FiGithub />, href: 'https://github.com/kb42', label: 'GitHub' },
-    { icon: <FiLinkedin />, href: 'https://linkedin.com/in/karthikbaga24', label: 'LinkedIn' },
-    { icon: <FiMail />, href: 'mailto:karthikbaga04@gmail.com', label: 'Email' },
-  ];
+    {
+      icon: <FiLinkedin />,
+      href: 'https://linkedin.com/in/karthikbaga24',
+      label: 'LinkedIn',
+    },
+    {
+      icon: <FiMail />,
+      href: 'mailto:karthikbaga04@gmail.com',
+      label: 'Email',
+    },
+  ]
 
   return (
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,9 +73,21 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
             className="card"
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+              {/* Netlify needs this hidden input */}
+              <input type="hidden" name="form-name" value="contact" />
+
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-text-light mb-2">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-text-light mb-2"
+                >
                   Name
                 </label>
                 <input
@@ -66,8 +100,12 @@ const Contact = () => {
                   required
                 />
               </div>
+
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-text-light mb-2">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-text-light mb-2"
+                >
                   Email
                 </label>
                 <input
@@ -80,8 +118,12 @@ const Contact = () => {
                   required
                 />
               </div>
+
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-text-light mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-text-light mb-2"
+                >
                   Message
                 </label>
                 <textarea
@@ -94,14 +136,23 @@ const Contact = () => {
                   required
                 />
               </div>
+
               <button
                 type="submit"
-                className="btn-primary w-full flex items-center justify-center space-x-2"
+                disabled={submitted}
+                className="btn-primary w-full flex items-center justify-center space-x-2 disabled:opacity-50"
               >
                 <FiSend className="w-5 h-5" />
-                <span>Send Message</span>
+                <span>{submitted ? 'Sent!' : 'Send Message'}</span>
               </button>
             </form>
+
+            {/* Success message */}
+            {submitted && (
+              <p className="mt-4 text-center text-green-500">
+                Thank you! Your message has been sent.
+              </p>
+            )}
           </motion.div>
 
           {/* Contact Info */}
@@ -115,8 +166,7 @@ const Contact = () => {
             <div>
               <h3 className="text-text-light font-semibold mb-4">Let's Connect</h3>
               <p className="text-text">
-                I'm currently looking for full-time Software Engineering opportunities and open to discussing new projects,
-                creative ideas, or opportunities to be part of your company's visions.
+                I’m open to full-time Software Engineering roles and new projects.
               </p>
             </div>
 
@@ -140,15 +190,13 @@ const Contact = () => {
 
             <div>
               <h3 className="text-text-light font-semibold mb-4">Location</h3>
-              <p className="text-text">
-                Chicago, Illinois
-              </p>
+              <p className="text-text">Chicago, Illinois</p>
             </div>
           </motion.div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Contact; 
+export default Contact
