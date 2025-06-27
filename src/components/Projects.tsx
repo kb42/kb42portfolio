@@ -204,10 +204,10 @@ const Projects = () => {
       {
         title: 'Curriculum Crafter',
         description: 'A full-stack academic planning tool that empowers students to create personalized academic pathways. This project integrates course catalog data and degree requirements using Flask, React, MySQL, and TypeScript, featuring interactive planning modules and dynamic visualizations.',
-        technologies: ['Flask', 'React', 'MySQL', 'TypeScript', 'CSS', 'GCP'],
+        technologies: ['Flask', 'React', 'MySQL', 'TypeScript', 'CSS', 'GCP', 'D3.js'],
         image: '/images/cc_web.png',
-        github: 'https://github.com/yourusername/fa24-cs411-team016-Indianess-of-411',
-        website: 'https://curriculum-crafter.example.com'
+        github: 'https://github.com/cs411-alawini/fa24-cs411-team016-Indianess-of-411',
+        website: 'https://curriculumcrafter.netlify.app/'
       },
       {
         title: 'Melodic Eyes',
@@ -234,10 +234,12 @@ const Projects = () => {
         // website: 'https://innovative-illuminations.example.com'
       },
       {
-        title: 'SoccerViz Analytics Dashboard',
-        description: 'An interactive dashboard that visualizes soccer competition trends and player performance. This project employs Shiny, ggplot2, and D3.js to deliver customizable analytics and intuitive data exploration.',
-        technologies: ['R', 'Shiny', 'ggplot2', 'D3.js'],
-        // no image provided will fallback
+        title: 'DocQA PDF AI Assistant',
+        description: 'An intelligent document analysis system that enables natural language querying of PDF content. Features extractive QA with RoBERTa and generative responses via Groq LLaMA, with advanced semantic search and production-ready rate limiting',
+        technologies: ['Python', 'Streamlit', 'FAISS', 'Transformers', 'RoBERTa', 'OpenAI', 'LLaMA', 'PyTorch'],
+        image: '/images/docqa_web.png',
+        github: 'https://github.com/kb42/docqa-pdf',
+        website: 'https://pdf-doc-reader.streamlit.app/'
       },
       {
         title: 'SummarizedSpeech',

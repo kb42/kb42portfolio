@@ -6,7 +6,7 @@ const Education = () => {
     degree: "BS in Computer Engineering",
     school: "University of Illinois Urbana-Champaign",
     period: "August 2022 - May 2025",
-    honors: "Honors Candidate",
+    honors: "Honors at Graduation",
     coursework: [
       "Database Systems",
       "Software Development",
