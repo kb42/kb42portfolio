@@ -24,10 +24,10 @@ const About = () => {
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           className="text-center mb-16"
         >
           <h2 className="section-title">About Me</h2>
@@ -37,10 +37,10 @@ const About = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* About Text */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
             className="space-y-6"
           >
             <p className="text-text-light text-lg">
@@ -61,19 +61,19 @@ const About = () => {
 
           {/* Interests Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 10 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
             className="grid grid-cols-1 gap-6"
           >
             {interests.map((interest, index) => (
               <motion.div
                 key={interest.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.25, delay: 0.3 + index * 0.05, ease: "easeOut" }}
                 className="card group"
               >
                 <div className="flex items-start space-x-4">

@@ -23,6 +23,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
     { href: '#about', label: 'About' },
     { href: '#education', label: 'Education' },
     { href: '#projects', label: 'Projects' },
+    { href: '#opensource', label: 'Open Source' },
     { href: '#experience', label: 'Experience' },
     { href: '#skills', label: 'Skills' },
     { href: '#contact', label: 'Contact' },

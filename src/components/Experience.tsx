@@ -41,10 +41,10 @@ const Experience = () => {
     <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           className="text-center mb-16"
         >
           <h2 className="section-title">Experience</h2>
@@ -54,10 +54,10 @@ const Experience = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Professional Experience */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="space-y-8"
           >
             <div className="flex items-center space-x-3 mb-8">
@@ -67,10 +67,10 @@ const Experience = () => {
             {experiences.professional.map((exp, index) => (
               <motion.div
                 key={exp.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
                 className="card"
               >
                 <h4 className="text-text-light font-semibold mb-1">{exp.title}</h4>
@@ -93,10 +93,10 @@ const Experience = () => {
 
           {/* Academic Experience */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 10 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             className="space-y-8"
           >
             <div className="flex items-center space-x-3 mb-8">
@@ -106,10 +106,10 @@ const Experience = () => {
             {experiences.academic.map((exp, index) => (
               <motion.div
                 key={exp.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.5 }}
+                transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
                 className="card"
               >
                 <h4 className="text-text-light font-semibold mb-1">{exp.title}</h4>
