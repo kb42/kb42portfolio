@@ -110,11 +110,12 @@ const Hero = () => {
                 
                 {/* Code Lines with Typing Animation */}
                 <g>
-                  <text x="180" y="140" fill="#7aa2f7" fontFamily="monospace" fontSize="14">
-                    <tspan className="animate-typing-line" style={{ animationDelay: '0s' }}>const greeting = "Hello, World!";</tspan>
-                    <tspan x="180" y="160" className="animate-typing-line" style={{ animationDelay: '1s' }}>function sayHello() {'{'}</tspan>
-                    <tspan x="200" y="180" className="animate-typing-line" style={{ animationDelay: '2s' }}>  console.log(greeting);</tspan>
-                    <tspan x="180" y="200" className="animate-typing-line" style={{ animationDelay: '3s' }}>{'}'}</tspan>
+                  <text x="170" y="140" fill="#7aa2f7" fontFamily="monospace" fontSize="12">
+                    <tspan className="animate-typing-line" style={{ animationDelay: '0s' }}>const greeting = "Hello!";</tspan>
+                    <tspan x="170" y="160" className="animate-typing-line" style={{ animationDelay: '1s' }}>function sayHello() {'{'}</tspan>
+                    <tspan x="185" y="180" className="animate-typing-line" style={{ animationDelay: '2s' }}>  console.log(greeting);</tspan>
+                    <tspan x="170" y="200" className="animate-typing-line" style={{ animationDelay: '3s' }}>{'}'}</tspan>
+                    <tspan x="170" y="220" className="animate-typing-line" style={{ animationDelay: '4s' }}>sayHello();</tspan>
                   </text>
                 </g>
               </svg>
