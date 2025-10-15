@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { FiBriefcase, FiAward } from 'react-icons/fi';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Experience = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
+
   const experiences = {
     professional: [
       {
@@ -39,38 +42,24 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Experience</h2>
           <p className="section-subtitle">My Professional Journey</p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} grid grid-cols-1 md:grid-cols-2 gap-12`}>
           {/* Professional Experience */}
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <div className="flex items-center space-x-3 mb-8">
               <FiBriefcase className="w-6 h-6 text-secondary" />
               <h3 className="text-2xl font-bold text-text-light">Professional Experience</h3>
             </div>
-            {experiences.professional.map((exp, index) => (
+            {experiences.professional.map((exp) => (
               <motion.div
-                key={exp.title}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
+                key={exp.title + exp.period}
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className="card"
               >
                 <h4 className="text-text-light font-semibold mb-1">{exp.title}</h4>
@@ -89,27 +78,19 @@ const Experience = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Academic Experience */}
-          <motion.div
-            initial={{ opacity: 0, x: 10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <div className="flex items-center space-x-3 mb-8">
               <FiAward className="w-6 h-6 text-secondary" />
               <h3 className="text-2xl font-bold text-text-light">Resrarch/Leadership Experience</h3>
             </div>
-            {experiences.academic.map((exp, index) => (
+            {experiences.academic.map((exp) => (
               <motion.div
-                key={exp.title}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
+                key={exp.title + exp.period}
+                whileHover={{ scale: 1.02, y: -4 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className="card"
               >
                 <h4 className="text-text-light font-semibold mb-1">{exp.title}</h4>
@@ -128,11 +109,11 @@ const Experience = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default Experience; 
+export default Experience;

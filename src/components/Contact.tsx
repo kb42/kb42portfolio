@@ -2,8 +2,10 @@
 import { motion } from 'framer-motion'
 import { FiGithub, FiLinkedin, FiMail, FiSend } from 'react-icons/fi'
 import { useState } from 'react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const Contact = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -51,26 +53,18 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" ref={ref}>
         {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Contact</h2>
           <p className="section-subtitle">Get In Touch</p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} grid grid-cols-1 md:grid-cols-2 gap-12`}>
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="card"
           >
             <form
@@ -137,14 +131,17 @@ const Contact = () => {
                 />
               </div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={submitted}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 className="btn-primary w-full flex items-center justify-center space-x-2 disabled:opacity-50"
               >
                 <FiSend className="w-5 h-5" />
                 <span>{submitted ? 'Sent!' : 'Send Message'}</span>
-              </button>
+              </motion.button>
             </form>
 
             {/* Success message */}
@@ -157,16 +154,14 @@ const Contact = () => {
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             className="card space-y-8"
           >
             <div>
               <h3 className="text-text-light font-semibold mb-4">Let's Connect</h3>
               <p className="text-text">
-                I’m open to full-time Software Engineering roles and new projects.
+                I'm open to full-time Software Engineering roles and new projects.
               </p>
             </div>
 
@@ -174,16 +169,19 @@ const Contact = () => {
               <h3 className="text-text-light font-semibold mb-4">Social Links</h3>
               <div className="flex space-x-6">
                 {socialLinks.map((link) => (
-                  <a
+                  <motion.a
                     key={link.label}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-text hover:text-secondary transition-colors duration-300"
+                    whileHover={{ y: -3, scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    className="text-text hover:text-secondary transition-colors duration-200 text-xl"
                     aria-label={link.label}
                   >
                     {link.icon}
-                  </a>
+                  </motion.a>
                 ))}
               </div>
             </div>

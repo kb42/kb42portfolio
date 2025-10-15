@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FiExternalLink } from 'react-icons/fi';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 // Project definition with optional links
 interface Project {
@@ -17,6 +18,7 @@ interface Project {
 type Category = 'all' | 'fullstack' | 'ml';
 
 const Projects = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.15 });
   const [activeCategory, setActiveCategory] = useState<Category>('all');
 
   const projects: Project[] = [
@@ -81,24 +83,21 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Projects</h2>
           <p className="section-subtitle">Some Things I've Built</p>
-        </motion.div>
+        </div>
 
-        <div className="flex justify-center space-x-4 mb-12">
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} flex justify-center space-x-4 mb-12`}>
           {['all', 'fullstack', 'ml'].map((category) => (
-            <button
+            <motion.button
               key={category}
               onClick={() => setActiveCategory(category as Category)}
-              className={`px-4 py-2 rounded-full text-sm font-sf-mono transition-colors duration-300 ${
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+              className={`px-4 py-2 rounded-full text-sm font-sf-mono transition-colors duration-200 ${
                 activeCategory === category
                   ? 'bg-secondary text-primary'
                   : 'text-text hover:text-secondary'
@@ -109,18 +108,16 @@ const Projects = () => {
                 : category === 'fullstack'
                 ? 'Full Stack'
                 : 'ML/AI'}
-            </button>
+            </motion.button>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`}>
+          {filteredProjects.map((project) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="card group"
             >
               <div className="relative overflow-hidden rounded-lg mb-4 h-48">

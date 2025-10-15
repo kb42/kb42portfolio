@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 import { GiChessKnight, GiCricketBat } from 'react-icons/gi';
 import { MdTravelExplore } from 'react-icons/md';
 import { FaFutbol, FaBicycle } from 'react-icons/fa';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Hobbies = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
+
   const hobbies = [
     {
       icon: <GiChessKnight className="w-8 h-8" />,
@@ -34,37 +37,70 @@ const Hobbies = () => {
 
   return (
     <section id="hobbies" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Hobbies</h2>
           <p className="section-subtitle">Beyond the Code</p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hobbies.map((hobby, index) => (
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''}`}>
+          {/* First row - 2 cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 max-w-3xl mx-auto">
+            {hobbies.slice(0, 2).map((hobby) => (
+              <motion.div
+                key={hobby.title}
+                whileHover={{ scale: 1.05, y: -6 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className="card group hover:bg-secondary/5 transition-colors duration-200"
+              >
+                <div className="flex flex-col items-center text-center p-6">
+                  <div className="text-secondary mb-4 group-hover:scale-110 transition-transform duration-200">
+                    {hobby.icon}
+                  </div>
+                  <h3 className="text-text-light font-semibold mb-2">{hobby.title}</h3>
+                  <p className="text-text">{hobby.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Second row - 2 cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 max-w-3xl mx-auto">
+            {hobbies.slice(2, 4).map((hobby) => (
+              <motion.div
+                key={hobby.title}
+                whileHover={{ scale: 1.05, y: -6 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className="card group hover:bg-secondary/5 transition-colors duration-200"
+              >
+                <div className="flex flex-col items-center text-center p-6">
+                  <div className="text-secondary mb-4 group-hover:scale-110 transition-transform duration-200">
+                    {hobby.icon}
+                  </div>
+                  <h3 className="text-text-light font-semibold mb-2">{hobby.title}</h3>
+                  <p className="text-text">{hobby.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Third row - 1 centered card */}
+          <div className="flex justify-center">
             <motion.div
-              key={hobby.title}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
-              className="card group hover:bg-secondary/5 transition-colors duration-300"
+              key={hobbies[4].title}
+              whileHover={{ scale: 1.05, y: -6 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="card group hover:bg-secondary/5 transition-colors duration-200 w-full sm:w-1/2 max-w-md"
             >
               <div className="flex flex-col items-center text-center p-6">
-                <div className="text-secondary mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {hobby.icon}
+                <div className="text-secondary mb-4 group-hover:scale-110 transition-transform duration-200">
+                  {hobbies[4].icon}
                 </div>
-                <h3 className="text-text-light font-semibold mb-2">{hobby.title}</h3>
-                <p className="text-text">{hobby.description}</p>
+                <h3 className="text-text-light font-semibold mb-2">{hobbies[4].title}</h3>
+                <p className="text-text">{hobbies[4].description}</p>
               </div>
             </motion.div>
-          ))}
+          </div>
         </div>
       </div>
     </section>

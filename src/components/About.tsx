@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { FiCode, FiBook, FiTarget } from 'react-icons/fi';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const About = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
+
   const interests = [
     {
       icon: <FiCode className="w-6 h-6" />,
@@ -22,62 +25,42 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">About Me</h2>
           <p className="section-subtitle">My Journey in Computer Science</p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} grid grid-cols-1 md:grid-cols-2 gap-12 items-center`}>
           {/* About Text */}
-          <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
-            className="space-y-6"
-          >
+          <div className="space-y-6">
             <p className="text-text-light text-lg">
               I'm a Computer Science student with a passion for software development and technology.
               My journey in computer science began with a curiosity about how things work on the internet,
               which led me to explore web development and programming.
             </p>
             <p className="text-text-light text-lg">
-            I am passionate about solving complex problems at the intersection of data, algorithms, and engineering. 
-            With a background in Computer Engineering and a minor in Statistics, I focus on building scalable systems, 
+            I am passionate about solving complex problems at the intersection of data, algorithms, and engineering.
+            With a background in Computer Engineering and a minor in Statistics, I focus on building scalable systems,
             improving performance, and leveraging AI to turn ideas into impactful solutions.
             </p>
             <p className="text-text-light text-lg">
-            I am always eager to connect with others in AI, data science, and software engineering, whether you are 
+            I am always eager to connect with others in AI, data science, and software engineering, whether you are
             looking for collaborators, sharing ideas, or discussing trends in technology. Let's connect!
             </p>
-          </motion.div>
+          </div>
 
           {/* Interests Grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
-            className="grid grid-cols-1 gap-6"
-          >
-            {interests.map((interest, index) => (
+          <div className="grid grid-cols-1 gap-6">
+            {interests.map((interest) => (
               <motion.div
                 key={interest.title}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.25, delay: 0.3 + index * 0.05, ease: "easeOut" }}
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 className="card group"
               >
                 <div className="flex items-start space-x-4">
-                  <div className="text-secondary group-hover:text-secondary-light transition-colors duration-300">
+                  <div className="text-secondary group-hover:text-secondary-light transition-colors duration-200">
                     {interest.icon}
                   </div>
                   <div>
@@ -87,7 +70,7 @@ const About = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

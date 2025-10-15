@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { FiCode, FiDatabase, FiCloud, FiTool } from 'react-icons/fi';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Skills = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
+
   const skills = {
     programming: [
       "Python",
@@ -64,26 +67,18 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Skills</h2>
           <p className="section-subtitle">Technologies I Work With</p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {categories.map((category, index) => (
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} grid grid-cols-1 md:grid-cols-2 gap-8`}>
+          {categories.map((category) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
+              whileHover={{ scale: 1.02, y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="card"
             >
               <div className="flex items-center space-x-3 mb-6">
@@ -108,4 +103,4 @@ const Skills = () => {
   );
 };
 
-export default Skills; 
+export default Skills;

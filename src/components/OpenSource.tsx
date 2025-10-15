@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 import { FiExternalLink, FiGitPullRequest } from 'react-icons/fi';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface Contribution {
   title: string;
@@ -27,6 +28,7 @@ interface GitHubStats {
 }
 
 const OpenSource = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
   const [githubStats, setGithubStats] = useState<GitHubStats | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -146,26 +148,14 @@ const OpenSource = () => {
 
   return (
     <section id="opensource" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Open Source</h2>
           <p className="section-subtitle">Contributing to the Community</p>
-        </motion.div>
+        </div>
 
         {/* GitHub Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.3, delay: 0.05, ease: "easeOut" }}
-          className="card mb-12"
-        >
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} card mb-12`}>
           <div className="flex items-center space-x-3 mb-6">
             <AiFillGithub className="text-secondary text-2xl" />
             <h3 className="text-xl font-bold text-text-light">GitHub Activity</h3>
@@ -215,17 +205,15 @@ const OpenSource = () => {
               <p>Unable to load GitHub stats</p>
             </div>
           )}
-        </motion.div>
+        </div>
 
         {/* Contributions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {contributions.map((contribution, index) => (
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6`}>
+          {contributions.map((contribution) => (
             <motion.div
               key={contribution.title}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               className="card group"
             >
               <div className="flex items-start justify-between mb-4">
@@ -269,25 +257,20 @@ const OpenSource = () => {
         </div>
 
         {/* GitHub Profile Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }}
-          className="text-center mt-12"
-        >
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mt-12`}>
           <motion.a
             href="https://github.com/kb42"
             target="_blank"
             rel="noreferrer"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             className="inline-flex items-center space-x-2 px-6 py-3 bg-secondary text-primary rounded-lg font-sf-mono text-sm hover:bg-secondary/90 transition-colors"
           >
             <AiFillGithub size={20} />
             <span>View More on GitHub</span>
           </motion.a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

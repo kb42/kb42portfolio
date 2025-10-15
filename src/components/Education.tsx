@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import { FiBook } from 'react-icons/fi';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 
 const Education = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.2 });
+
   const educationList = [
     {
       degree: "Masters in Computer Science",
@@ -35,57 +38,51 @@ const Education = () => {
 
   return (
     <section id="education" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
+      <div className="max-w-7xl mx-auto" ref={ref}>
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} text-center mb-16`}>
           <h2 className="section-title">Education</h2>
           <p className="section-subtitle">My Academic Background</p>
-        </motion.div>
+        </div>
 
-        {educationList.map((edu, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.25, delay: index * 0.05, ease: "easeOut" }}
-            className="card max-w-4xl mx-auto mb-10"
-          >
-            <div className="flex items-center space-x-3 mb-6">
-              <FiBook className="w-6 h-6 text-secondary" />
-              <h3 className="text-2xl font-bold text-text-light">{edu.degree}</h3>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <p className="text-secondary text-lg">{edu.school}</p>
-                <p className="text-text">{edu.period}</p>
-                {edu.honors ? 
-                  <p className="text-secondary text-sm">Awards: {edu.honors}</p> 
-                  : null}
+        <div className={`reveal ${isVisible ? 'reveal-visible' : ''} space-y-10`}>
+          {educationList.map((edu, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.01, y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              className="card max-w-4xl mx-auto"
+            >
+              <div className="flex items-center space-x-3 mb-6">
+                <FiBook className="w-6 h-6 text-secondary" />
+                <h3 className="text-2xl font-bold text-text-light">{edu.degree}</h3>
               </div>
 
-              <div>
-                <h4 className="text-text-light font-semibold mb-2">Relevant Coursework</h4>
-                <div className="flex flex-wrap gap-2">
-                  {edu.coursework.map((course) => (
-                    <span
-                      key={course}
-                      className="px-3 py-1 text-sm font-sf-mono bg-secondary/10 text-secondary rounded-full"
-                    >
-                      {course}
-                    </span>
-                  ))}
+              <div className="space-y-4">
+                <div>
+                  <p className="text-secondary text-lg">{edu.school}</p>
+                  <p className="text-text">{edu.period}</p>
+                  {edu.honors ?
+                    <p className="text-secondary text-sm">Awards: {edu.honors}</p>
+                    : null}
+                </div>
+
+                <div>
+                  <h4 className="text-text-light font-semibold mb-2">Relevant Coursework</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {edu.coursework.map((course) => (
+                      <span
+                        key={course}
+                        className="px-3 py-1 text-sm font-sf-mono bg-secondary/10 text-secondary rounded-full"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

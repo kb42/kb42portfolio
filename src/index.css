@@ -73,7 +73,106 @@
   @apply bg-secondary/20 text-text-light;
 }
 
+/* Smooth scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Smooth transitions */
 * {
-  @apply transition-colors duration-300;
+  @apply transition-colors duration-200;
+}
+
+/* Code block typing animation */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes glow-line {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px rgba(122, 162, 247, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(122, 162, 247, 0.6));
+  }
+}
+
+.code-line {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeInLine 0.3s ease-out forwards;
+}
+
+@keyframes fadeInLine {
+  to {
+    opacity: 1;
+  }
+}
+
+.code-line.typing {
+  animation: typewriter 1.2s steps(30) forwards,
+             fadeInLine 0.1s ease-out forwards;
+}
+
+.code-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background-color: #7aa2f7;
+  margin-left: 2px;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+.code-line.active {
+  animation: glow-line 2s ease-in-out infinite;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .code-line {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .code-cursor {
+    animation: none !important;
+    opacity: 1;
+  }
 }
