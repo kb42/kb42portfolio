@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { AiFillGithub, AiOutlineStar, AiOutlineFork } from 'react-icons/ai';
+import { AiFillGithub } from 'react-icons/ai';
 import { FiExternalLink, FiGitPullRequest } from 'react-icons/fi';
 
 interface Contribution {
