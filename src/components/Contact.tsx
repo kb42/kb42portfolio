@@ -11,7 +11,7 @@ const Contact = () => {
     email: '',
     message: '',
   })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,8 +19,10 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setStatus('submitting')
+
     // prepare URL-encoded form body
     const body = new URLSearchParams()
     body.append('form-name', 'contact')
@@ -28,13 +30,23 @@ const Contact = () => {
     body.append('email', formData.email)
     body.append('message', formData.message)
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString(),
-    })
-      .then(() => setSubmitted(true))
-      .catch(() => setSubmitted(true))
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      })
+
+      if (response.ok) {
+        setStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setStatus('error')
+    }
   }
 
   const socialLinks = [
@@ -71,11 +83,13 @@ const Contact = () => {
               name="contact"
               method="POST"
               data-netlify="true"
+              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit}
               className="space-y-6"
             >
-              {/* Netlify needs this hidden input */}
+              {/* Netlify needs these hidden inputs */}
               <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
 
               <div>
                 <label
@@ -133,22 +147,40 @@ const Contact = () => {
 
               <motion.button
                 type="submit"
-                disabled={submitted}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                disabled={status === 'submitting' || status === 'success'}
+                whileHover={{ scale: status === 'submitting' || status === 'success' ? 1 : 1.02 }}
+                whileTap={{ scale: status === 'submitting' || status === 'success' ? 1 : 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 className="btn-primary w-full flex items-center justify-center space-x-2 disabled:opacity-50"
               >
                 <FiSend className="w-5 h-5" />
-                <span>{submitted ? 'Sent!' : 'Send Message'}</span>
+                <span>
+                  {status === 'submitting' && 'Sending...'}
+                  {status === 'success' && 'Sent!'}
+                  {status === 'idle' && 'Send Message'}
+                  {status === 'error' && 'Send Message'}
+                </span>
               </motion.button>
             </form>
 
-            {/* Success message */}
-            {submitted && (
-              <p className="mt-4 text-center text-green-500">
-                Thank you! Your message has been sent.
-              </p>
+            {/* Status messages */}
+            {status === 'success' && (
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 text-center text-green-500 font-medium"
+              >
+                ✓ Thank you! Your message has been sent successfully.
+              </motion.p>
+            )}
+            {status === 'error' && (
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 text-center text-red-500 font-medium"
+              >
+                ✗ Something went wrong. Please try again or email me directly.
+              </motion.p>
             )}
           </motion.div>
 
